@@ -55,7 +55,7 @@ function isOutsideClicked(event) {
 }
 </script>
 
-<template>
+<!-- <template>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
         <app-sidebar></app-sidebar>
@@ -68,4 +68,24 @@ function isOutsideClicked(event) {
         <div class="layout-mask animate-fadein"></div>
     </div>
     <Toast />
-</template>
+</template> -->
+<template>
+    <div class="app-container">  <!-- Elemento raíz único -->
+      <div class="layout-wrapper" :class="containerClass">
+        <app-topbar></app-topbar>
+        <app-sidebar></app-sidebar>
+        <div class="layout-main-container">
+          <div class="layout-main">
+            <router-view v-slot="{ Component }">
+              <transition name="fade" mode="out-in">
+                <component :is="Component" :key="$route.fullPath" />
+              </transition>
+            </router-view>
+          </div>
+          <app-footer></app-footer>
+        </div>
+        <div class="layout-mask animate-fadein"></div>
+      </div>
+      <Toast />
+    </div>
+  </template>

@@ -9,11 +9,11 @@ const model = ref([
         items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
     },
     {
-        label: 'SEGURIDAD',
+        label: 'SETUP',
         items: [
-            { label: 'Usuarios', icon: 'pi pi-fw pi-id-card', to: '/admin/usuarios' },
-            { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles' },
-            { label: 'Menus', icon: 'pi pi-fw pi-mobile', to: '/admin/menus', class: 'rotated-icon' },
+            { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/app/usuarios' },
+            { label: 'Roles', icon: 'pi pi-fw pi-sliders-h', to: '/app/roles' },
+            { label: 'Menus', icon: 'pi pi-fw pi-mobile', to: '/app/menus', class: 'rotated-icon' },
         ]
     },
     {
