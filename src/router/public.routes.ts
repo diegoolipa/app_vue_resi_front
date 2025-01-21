@@ -1,3 +1,6 @@
+import Login from '../views/auth/Login.vue';
+import Register from '../views/auth/Register.vue';
+
 export default [
     {
         path: '/',
@@ -21,6 +24,22 @@ export default [
         meta: { 
             layout: 'public',
             title: 'Contacto' 
+        }
+    },
+    {
+    path: '/registro',
+    component: Register,
+    meta: { 
+        layout: 'public',
+        title: 'Registro' 
+        }
+    },
+    {
+    path: '/login',
+    component: Login,
+    meta: { 
+        layout: 'public',
+        title: 'Iniciar Sesión' 
         }
     },
     {

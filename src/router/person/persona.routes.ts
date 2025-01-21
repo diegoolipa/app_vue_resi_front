@@ -1,9 +1,9 @@
 // src/router/hola-mundo/hola-mundo.routes.ts
 import { type RouteRecordRaw } from 'vue-router';
 
-const usuarioRoutes: RouteRecordRaw = {
+const personaRoutes: RouteRecordRaw = {
   path: 'usuarios',
-  component: () => import('../../views/person/Usuario.vue'),
+  component: () => import('@/views/person/Persona.vue'),
   meta: {
     requiresAuth: true,
     layout: 'person',
@@ -31,4 +31,4 @@ const usuarioRoutes: RouteRecordRaw = {
   // ]
 };
 
-export default usuarioRoutes;
+export default personaRoutes;

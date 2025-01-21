@@ -8,7 +8,7 @@ const perfilRoutes: RouteRecordRaw = {
   meta: {
     requiresAuth: true,
     layout: 'person',
-    title: 'Usuario',
+    title: 'Perfil',
   },
   children: [
     // {

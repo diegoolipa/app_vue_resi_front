@@ -8,13 +8,15 @@
     <input type="password" v-model="usuario.password" /><br />
     {{ usuario }}
     <!-- <input type="submit" value="Ingresar"  /> -->
-    <button :disabled="authStore.loading" type="submit" 
-        v-on:click="ingresarPinia()">
+    <button
+      :disabled="authStore.loading"
+      type="submit"
+      v-on:click="ingresarPinia()"
+    >
       {{ authStore.loading ? 'Cargando...' : 'Ingresar' }}
     </button>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -23,7 +25,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/auth.store';
 
 const route = useRouter();
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 const loading = ref(false);
 const usuario = ref({
@@ -31,17 +33,19 @@ const usuario = ref({
   password: '',
 });
 
-
-const ingresarPinia = async ()=> {
+const ingresarPinia = async () => {
   try {
     console.log('diego 1');
-    await authStore.loginPinia(usuario.value)
+    await authStore.loginPinia(usuario.value);
     console.log('diego 2');
-    route.push('/admin/perfil');
+    await route.push({
+      path: '/app/perfil',
+      replace: true, // Esto evita que se pueda volver al login con el botón atrás
+    });
   } catch (error) {
-    console.error('Error de login:', error)
+    console.error('Error de login:', error);
   }
-}
+};
 
 const ingresar = async () => {
   loading.value = true;
@@ -50,7 +54,7 @@ const ingresar = async () => {
     console.log(response);
 
     localStorage.setItem('access_token', response.data.data.access_token);
-    route.push('/admin/perfil');
+    route.push('/app');
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
   } finally {

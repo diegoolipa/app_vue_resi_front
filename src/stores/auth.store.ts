@@ -1,6 +1,7 @@
 // src/stores/auth.store.ts
 import { defineStore } from 'pinia';
 import authService from '../services/auth/auth.service';
+import { nextTick } from 'vue';
 
 export const useAuthStore = defineStore('auth', {
   state: (): any => ({
@@ -29,9 +30,11 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true;
       try {
         const response = await authService.login(credentials);
-        this.token = response.data.access_token;
-        this.user = response.data.usuario;
+        this.token = response.data.data.access_token;
+        this.user = response.data.data.usuario;
         localStorage.setItem('access_token_pinia', this.token);
+        // Esperar a que los datos estén listos
+        await nextTick();
       } catch (error) {
         this.error =
           error instanceof Error ? error.message : 'Error desconocido';

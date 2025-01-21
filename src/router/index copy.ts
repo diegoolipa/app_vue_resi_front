@@ -12,7 +12,8 @@ import Perfil from '../views/admin/perfil/Perfil.vue';
 // Importaciones de rutas modulares
 import holaMundoRoutes from './hola-mundo/hola-mundo.routes';
 import AppLayout from '@/layout/AppLayout.vue';
-import UsuarioRoutes from './person/usuario.routes';
+import UsuarioRoutes from './person/persona.routes';
+import Persona from '../views/person/Persona.vue';
 
 const routes: RouteRecordRaw[] = [
 
@@ -46,7 +47,7 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/admin',
+    path: '/app',
     component: AppLayout,
     meta: { 
       requiresAuth: true,
@@ -54,14 +55,17 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: 'usuarios',
+        component: Persona,
+        meta: { title: 'Acerca de' },
+      },
+      {
         path: 'perfil',
         component: Perfil,
-        meta: { 
-          title: 'Mi Perfil'
-        }
+        meta: { title: 'Registro' },
       },
-      holaMundoRoutes,
-      UsuarioRoutes,
+      // holaMundoRoutes,
+      // UsuarioRoutes,
     ]
   },
   // Módulo de rutas externo
