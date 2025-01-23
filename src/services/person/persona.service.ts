@@ -1,20 +1,15 @@
-import api from '../api.service';
+import http from '../api.service';
 
 const url = `/v1/person`;
 
 export default {
- listar: () => 
-   api().get(`${url}/persona`),
+  listar: () => http.get(`${url}/persona`),
 
- guardar: (data: any) => 
-   api().post(`${url}/persona`, data),
+  guardar: (data: any) => http.post(`${url}/persona`, data),
 
- mostrar: (id:number) => 
-   api().get(`${url}/persona/${id}`),
+  mostrar: (id: number) => http.get(`${url}/persona/${id}`),
 
- actualizar: (id:number, data: any) => 
-   api().put(`${url}/persona/${id}`,data),
+  actualizar: (id: number, data: any) => http.put(`${url}/persona/${id}`, data),
 
- eliminar: (id:number) => 
-    api().delete(`${url}/persona/${id}`),
-}
+  eliminar: (id: number) => http.delete(`${url}/persona/${id}`),
+};

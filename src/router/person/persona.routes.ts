@@ -3,32 +3,26 @@ import { type RouteRecordRaw } from 'vue-router';
 
 const personaRoutes: RouteRecordRaw = {
   path: 'usuarios',
-  component: () => import('@/views/person/Persona.vue'),
+  component: () => import('@/views/person/persona/Persona.vue'),
   meta: {
     requiresAuth: true,
     layout: 'person',
     title: 'Usuarios',
   },
-  // children: [
-  //   {
-  //     path: 'usuarios',
-  //     name: 'usuarios',
-  //     component: () => import('../../views/person/usuario/Usuario.vue'),
-  //     meta: { title: 'Lista - Usuarios' },
-  //   },
-    // {
-    //   path: 'crear',
-    //   name: 'hola-mundo-create',
-    //   component: () => import('@/views/hola-mundo/HolaMundoCreate.vue'),
-    //   meta: { title: 'Crear - Hola Mundo' }
-    // },
-    // {
-    //   path: 'editar/:id',
-    //   name: 'hola-mundo-edit',
-    //   component: () => import('@/views/hola-mundo/HolaMundoEdit.vue'),
-    //   meta: { title: 'Editar - Hola Mundo' }
-    // }
-  // ]
+  children: [
+    {
+      path: '', // ruta base para la lista
+      name: 'usuarios-list',
+      component: () => import('@/views/person/persona/PersonaList.vue'),
+      meta: { title: 'Usuarios' }
+    },
+    {
+      path: 'persona-detalle/:userId/:personaId',
+      name: 'persona-detail',
+      component: () => import('@/views/person/persona/PersonaDetail.vue'),
+      meta: { title: 'Detalle Persona' }
+    }
+  ]
 };
 
 export default personaRoutes;

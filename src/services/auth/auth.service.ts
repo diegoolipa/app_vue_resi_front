@@ -1,18 +1,18 @@
-import api from '../api.service';
+import http from '../api.service';
 
 const url = `/v1/auth`;
 
 export default {
   login(credencial: any) {
-    return api().post(`${url}/login`, credencial);
+    return http.post(`${url}/login`, credencial);
   },
   register(data: any) {
-    return api().post(`${url}/register`, data);
+    return http.post(`${url}/register`, data);
   },
   profile() {
-    return api().get(`${url}/profile`);
+    return http.get(`${url}/profile`);
   },
   logout() {
-    return api().post(`${url}/logout`);
+    return http.post(`${url}/logout`);
   },
 };

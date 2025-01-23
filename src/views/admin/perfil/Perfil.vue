@@ -48,7 +48,7 @@ const getPerfil = async () => {
   try {
     const response = await authService.profile();
     perfil.value = response.data;
-    console.log(response);
+    console.log(response.data);
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
   } finally {

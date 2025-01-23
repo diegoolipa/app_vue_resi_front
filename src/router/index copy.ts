@@ -13,7 +13,7 @@ import Perfil from '../views/admin/perfil/Perfil.vue';
 import holaMundoRoutes from './hola-mundo/hola-mundo.routes';
 import AppLayout from '@/layout/AppLayout.vue';
 import UsuarioRoutes from './person/persona.routes';
-import Persona from '../views/person/Persona.vue';
+import Persona from '../views/person/persona/Persona.vue';
 
 const routes: RouteRecordRaw[] = [
 

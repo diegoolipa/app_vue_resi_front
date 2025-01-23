@@ -9,6 +9,8 @@ import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 import ToastService from 'primevue/toastservice';
 
+// import { vuelidate } from '@vuelidate/core'
+
 import '@/assets/styles.scss';
 import '@/assets/tailwind.css';
 
@@ -26,4 +28,5 @@ app.use(PrimeVue, {
 });
 app.use(ToastService);
 app.use(ConfirmationService);
+
 app.mount('#app')
