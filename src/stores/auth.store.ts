@@ -30,8 +30,8 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true;
       try {
         const response = await authService.login(credentials);
-        this.token = response.data.data.access_token;
-        this.user = response.data.data.usuario;
+        this.token = response.data.access_token;
+        this.user = response.data.usuario;
         localStorage.setItem('access_token_pinia', this.token);
         // Esperar a que los datos estén listos
         await nextTick();

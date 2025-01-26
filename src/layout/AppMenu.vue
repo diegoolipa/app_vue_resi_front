@@ -18,10 +18,41 @@ const model = ref([
         ]
     },
     {
-        label: 'Pages',
+        label: 'CONFIGURACION',
         icon: 'pi pi-fw pi-briefcase',
         to: '/pages',
         items: [
+        {
+                label: 'Tipos',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Tipo Documento',
+                        icon: 'pi pi-fw pi-sign-in',
+                        to: '/auth/login'
+                    },
+                    {
+                        label: 'Tipo Genero',
+                        icon: 'pi pi-fw pi-times-circle',
+                        to: '/auth/error'
+                    },
+                    {
+                        label: 'Tipo Estado Civile',
+                        icon: 'pi pi-fw pi-lock',
+                        to: '/auth/access'
+                    },
+                    {
+                        label: 'Tipo Moneda',
+                        icon: 'pi pi-fw pi-lock',
+                        to: '/auth/access'
+                    },
+                    {
+                        label: 'Tipo Habitacion',
+                        icon: 'pi pi-fw pi-lock',
+                        to: '/auth/access'
+                    },
+                ]
+            },
             {
                 label: 'Landing',
                 icon: 'pi pi-fw pi-globe',
