@@ -5,6 +5,7 @@ import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
 import AppTopbar from './AppTopbar.vue';
 import { useAuthStore } from '../stores/auth.store';
+import AppBreadcrumb from '@/components/AppBreadcrumb.vue';
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout();
 

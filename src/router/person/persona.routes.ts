@@ -14,13 +14,13 @@ const personaRoutes: RouteRecordRaw = {
       path: '', // ruta base para la lista
       name: 'usuarios-list',
       component: () => import('@/views/person/persona/PersonaList.vue'),
-      meta: { title: 'Usuarios listaaaa' }
+      meta: { title: 'Lista' }
     },
     {
       path: 'persona-detalle/:userId/:personaId',
       name: 'persona-detail',
       component: () => import('@/views/person/persona/PersonaDetail.vue'),
-      meta: { title: 'Detalle Persona' }
+      meta: { title: 'Detalle' }
     }
   ]
 };

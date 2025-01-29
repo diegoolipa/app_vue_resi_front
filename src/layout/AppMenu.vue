@@ -11,15 +11,14 @@ const model = ref([
     {
         label: 'ADMINISTRATION',
         items: [
-            { label: 'Empresas', icon: 'pi pi-fw pi-database', to: '/app/empresas' },
-            { label: 'Entidad', icon: 'pi pi-fw pi-mobile', to: '/app/entidades' },
-            { label: 'Departamento', icon: 'pi pi-fw pi-home', to: '/app/departamentos' },
+            { label: 'Entidad', icon: 'pi pi-fw pi-mobile', to: '/app/administration/entidades' },
+            { label: 'Departamento', icon: 'pi pi-fw pi-home', to: '/app/administration/departamentos' },
         ]
     },
     {
         label: 'SETUP',
         items: [
-            { label: 'Usuarios', icon: 'pi pi-fw pi-users', to: '/app/setup/usuarios' },
+            { label: 'Personas', icon: 'pi pi-fw pi-users', to: '/app/setup/usuarios' },
             { label: 'Roles', icon: 'pi pi-fw pi-sliders-h', to: '/app/setup/rol' },
             { label: 'Menus', icon: 'pi pi-fw pi-mobile', to: '/app/setup/menus' },
             { label: 'Perfil', icon: 'pi pi-fw pi-user', to: '/app/setup/perfil'},

@@ -3,7 +3,7 @@ import { type RouteRecordRaw } from 'vue-router';
 
 const accesoRoutes: RouteRecordRaw = {
   path: 'rol',
-  component: () => import('@/views/setup/Rol.vue'),
+  component: () => import('@/views/setup/rol/Rol.vue'),
   meta: {
     requiresAuth: true,
     layout: 'rol',
@@ -13,7 +13,7 @@ const accesoRoutes: RouteRecordRaw = {
     {
       path: '', // ruta base para la lista
       name: 'rol-lista',
-      component: () => import('@/views/setup/RolLista.vue'),
+      component: () => import('@/views/setup/rol/RolLista.vue'),
       meta: { title: 'Rol lista' }
     }
   ]

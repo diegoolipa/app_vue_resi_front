@@ -1,9 +1,8 @@
-// src/router/hola-mundo/hola-mundo.routes.ts
 import { type RouteRecordRaw } from 'vue-router';
 
 const departamentoRoutes: RouteRecordRaw = {
   path: 'departamentos',
-  component: () => import('@/views/person/persona/Persona.vue'),
+  component: () => import('@/views/administration/departamento/Departamento.vue'),
   meta: {
     requiresAuth: true,
     layout: 'departamento',
@@ -12,9 +11,9 @@ const departamentoRoutes: RouteRecordRaw = {
   children: [
     {
       path: '', // ruta base para la lista
-      name: 'list',
-      component: () => import('@/views/person/persona/PersonaList.vue'),
-      meta: { title: 'Departamentos lista' }
+      name: 'Dlist',
+      component: () => import('@/views/administration/departamento/DepartamentoList.vue'),
+      meta: { title: 'Lista' }
     }
   ]
 };

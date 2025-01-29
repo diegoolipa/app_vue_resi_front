@@ -1,9 +1,8 @@
-// src/router/hola-mundo/hola-mundo.routes.ts
 import { type RouteRecordRaw } from 'vue-router';
 
 const entidadRoutes: RouteRecordRaw = {
   path: 'entidades',
-  component: () => import('@/views/person/persona/Persona.vue'),
+  component: () => import('@/views/administration/entidad/Entidad.vue'),
   meta: {
     requiresAuth: true,
     layout: 'entidades',
@@ -13,8 +12,8 @@ const entidadRoutes: RouteRecordRaw = {
     {
       path: '', // ruta base para la lista
       name: 'list',
-      component: () => import('@/views/person/persona/PersonaList.vue'),
-      meta: { title: 'Entidades lista' }
+      component: () => import('@/views/administration/entidad/EntidadList.vue'),
+      meta: { title: 'Lista' }
     }
   ]
 };

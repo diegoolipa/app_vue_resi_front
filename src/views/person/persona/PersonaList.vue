@@ -5,10 +5,22 @@
       <!-- <template #subtitle>Card subtitle</template> -->
 
       <template #content>
-
         <div class="flex flex-col gap-3 my-4">
+          <!-- Filtro tipo persona -->
+          <div class="w-full md:w-1/4">
+            <FloatLabel class="flex-1">
+              <Select
+                v-model="selectedTipoPersona"
+                :options="tipoPersonas"
+                optionLabel="name"
+                class="w-full"
+              />
+              <label>Tipo Persona</label>
+            </FloatLabel>
+          </div>
+
           <!-- Buscador en la primera fila -->
-          <div class="w-full">
+          <div class="w-full pt-4">
             <FloatLabel class="flex-1">
               <IconField>
                 <InputText type="text" v-model="searchQuery" class="w-full" />
@@ -31,26 +43,10 @@
               icon="pi pi-refresh"
               severity="secondary"
               label="Actualizar"
-              @click="refreshData"
               outlined
               v-tooltip.bottom="'Actualizar datos'"
             />
-            <Button
-              icon="pi pi-filter"
-              label="Filtros"
-              severity="info"
-              @click="toggleFilters"
-              outlined
-              v-tooltip.bottom="'Filtros activos'"
-            />
-            <Button
-              icon="pi pi-file-excel"
-              label="Exportar"
-              severity="secondary"
-              @click="exportToExcel"
-              outlined
-            />
-
+      
           </div>
         </div>
         <Divider />
@@ -183,7 +179,7 @@
           tableStyle="min-width: 50rem"
         >
           <Column field="usuario.email" header="Email"></Column>
-          <Column field="usuario.name" header="Nombre"></Column>
+          <Column field="usuario.name" header="Usuario"></Column>
           <Column
             field="tipo_persona"
             header="Tipo Persona"
@@ -264,7 +260,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import personaService from '../../../services/person/persona.service';
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength, helpers } from '@vuelidate/validators';
@@ -277,11 +273,12 @@ const searchQuery = ref('');
 const personas = ref([]);
 const loading = ref(false);
 const visible = ref(false);
-const selectedTipoPersona = ref();
 const tipoPersonas = ref([
   { name: 'Persona Natural', code: 'N' },
   { name: 'Persona Juridica', code: 'J' },
 ]);
+const selectedTipoPersona = ref(tipoPersonas.value[0]); // Inicia con 'N'
+
 // Define el tipo
 type FormData = {
   usuario: string;
@@ -363,15 +360,46 @@ onMounted(() => {
 async function getListarPersona() {
   loading.value = true;
   try {
-    const response = await personaService.listar();
+    // Cargar inicialmente con tipo_persona=N
+    const response = await personaService.listar({ 
+      tipo_persona: selectedTipoPersona.value.code 
+    });
     personas.value = response.data.data;
-  } catch (e) {
-    loading.value = false;
-    console.error('Error: ', e);
+  } catch (error) {
+    console.error('Error:', error);
   } finally {
     loading.value = false;
   }
 }
+
+// Watch para búsqueda y tipo de persona
+watch([searchQuery, selectedTipoPersona], async ([query, tipo]:any) => {
+  console.log(query, tipo);
+  
+  try {
+    loading.value = true;
+    const params: { tipo_persona?: string; search?: string } = {};
+    
+    // Solo agregamos tipo_persona si está seleccionado
+    if (tipo) {
+      params.tipo_persona = tipo.code;
+    }
+    
+    // Solo agregamos search si hay texto de búsqueda
+    if (query && query.length >= 3) {
+      params.search = query;
+    }
+
+    const response = await personaService.listar(params);
+    personas.value = response.data.data;
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    loading.value = false;
+  }
+}, { debounce: 500 });
+
+
 </script>
 <style scoped>
 .p-invalid {
