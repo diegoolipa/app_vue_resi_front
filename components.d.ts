@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppBreadcrumb: typeof import('./src/components/AppBreadcrumb.vue')['default']
     AutoComplete: typeof import('primevue/autocomplete')['default']
+    Badge: typeof import('primevue/badge')['default']
     BlockUI: typeof import('primevue/blockui')['default']
     Breadcrumb: typeof import('primevue/breadcrumb')['default']
     Button: typeof import('primevue/button')['default']
@@ -19,6 +20,7 @@ declare module 'vue' {
     DataTable: typeof import('primevue/datatable')['default']
     DatePicker: typeof import('primevue/datepicker')['default']
     Dialog: typeof import('primevue/dialog')['default']
+    Divider: typeof import('primevue/divider')['default']
     Field: typeof import('./src/components/form/Field.vue')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     Fluid: typeof import('primevue/fluid')['default']
@@ -44,6 +46,7 @@ declare module 'vue' {
     Slider: typeof import('primevue/slider')['default']
     TabPanel: typeof import('primevue/tabpanel')['default']
     TabView: typeof import('primevue/tabview')['default']
+    Tag: typeof import('primevue/tag')['default']
     Textarea: typeof import('primevue/textarea')['default']
     Toast: typeof import('primevue/toast')['default']
     ToggleButton: typeof import('primevue/togglebutton')['default']
@@ -52,5 +55,6 @@ declare module 'vue' {
   }
   export interface ComponentCustomProperties {
     StyleClass: typeof import('primevue/styleclass')['default']
+    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }

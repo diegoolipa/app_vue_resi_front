@@ -2,9 +2,59 @@
   <div class="usuario-container">
     <Card>
       <template #title>Usuario - Persona</template>
-      <template #subtitle>Card subtitle</template>
+      <!-- <template #subtitle>Card subtitle</template> -->
+
       <template #content>
-        <Button label="Registrar Persona" @click="visible = true" />
+
+        <div class="flex flex-col gap-3 my-4">
+          <!-- Buscador en la primera fila -->
+          <div class="w-full">
+            <FloatLabel class="flex-1">
+              <IconField>
+                <InputText type="text" v-model="searchQuery" class="w-full" />
+                <InputIcon class="pi pi-search" />
+              </IconField>
+              <label>Buscar</label>
+            </FloatLabel>
+          </div>
+
+          <!-- Botones en la segunda fila -->
+          <div class="flex gap-2">
+            <Button
+              icon="pi pi-plus"
+              label="Agregar"
+              severity="success"
+              @click="visible = true"
+              outlined
+            />
+            <Button
+              icon="pi pi-refresh"
+              severity="secondary"
+              label="Actualizar"
+              @click="refreshData"
+              outlined
+              v-tooltip.bottom="'Actualizar datos'"
+            />
+            <Button
+              icon="pi pi-filter"
+              label="Filtros"
+              severity="info"
+              @click="toggleFilters"
+              outlined
+              v-tooltip.bottom="'Filtros activos'"
+            />
+            <Button
+              icon="pi pi-file-excel"
+              label="Exportar"
+              severity="secondary"
+              @click="exportToExcel"
+              outlined
+            />
+
+          </div>
+        </div>
+        <Divider />
+
         <Dialog
           v-model:visible="visible"
           modal
@@ -126,6 +176,7 @@
             </div>
           </form>
         </Dialog>
+
         <DataTable
           :value="personas"
           :loading="loading"
@@ -133,9 +184,50 @@
         >
           <Column field="usuario.email" header="Email"></Column>
           <Column field="usuario.name" header="Nombre"></Column>
-          <Column field="category" header="Category"></Column>
-          <Column field="quantity" header="Persona"></Column>
-          <Column :exportable="false" header="Opc.">
+          <Column
+            field="tipo_persona"
+            header="Tipo Persona"
+            class="text-center"
+          >
+            <template #body="slotProps">
+              <Tag
+                :value="
+                  slotProps.data.tipo_persona === 'J' ? 'Jurídica' : 'Natural'
+                "
+                :severity="
+                  slotProps.data.tipo_persona === 'J' ? 'info' : 'success'
+                "
+                :icon="
+                  slotProps.data.tipo_persona === 'J'
+                    ? 'pi pi-building'
+                    : 'pi pi-user'
+                "
+              />
+            </template>
+          </Column>
+          <Column field="estado" header="Estado">
+            <template #body="slotProps">
+              <Tag
+                v-if="slotProps.data.estado === 1"
+                icon="pi pi-check"
+                severity="success"
+                value=""
+                rounded
+              />
+              <Tag
+                v-else
+                icon="pi pi-times"
+                severity="danger"
+                value=""
+                rounded
+              />
+            </template>
+          </Column>
+          <Column
+            :exportable="false"
+            header="Opciones"
+            class="flex justify-center"
+          >
             <template #body="slotProps">
               <Button icon="pi pi-pencil" outlined rounded class="mr-2" />
               <Button
@@ -175,11 +267,12 @@
 import { onMounted, reactive, ref } from 'vue';
 import personaService from '../../../services/person/persona.service';
 import { useVuelidate } from '@vuelidate/core';
-import { required, minLength, helpers, sameAs } from '@vuelidate/validators';
+import { required, minLength, helpers } from '@vuelidate/validators';
 import { validationMessages } from '@/validations/messages';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const searchQuery = ref('');
 
 const personas = ref([]);
 const loading = ref(false);

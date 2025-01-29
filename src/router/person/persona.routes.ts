@@ -6,15 +6,15 @@ const personaRoutes: RouteRecordRaw = {
   component: () => import('@/views/person/persona/Persona.vue'),
   meta: {
     requiresAuth: true,
-    layout: 'person',
-    title: 'Usuarios',
+    layout: 'usuario',
+    title: 'Usuario',
   },
   children: [
     {
       path: '', // ruta base para la lista
       name: 'usuarios-list',
       component: () => import('@/views/person/persona/PersonaList.vue'),
-      meta: { title: 'Usuarios' }
+      meta: { title: 'Usuarios listaaaa' }
     },
     {
       path: 'persona-detalle/:userId/:personaId',
